@@ -5,7 +5,7 @@
     xmlns="http://www.danilovolles.com/celestialObjects"
     elementFormDefault="qualified">
 
-    <!-- Enumeração para tipos de astro -->
+    <!-- CelestialObject ENUM -->
     <xs:simpleType name="CelestialObjectType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="STAR"/>
@@ -18,12 +18,12 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <!-- Tipo abstrato Astro -->
+    <!-- abstract CelestialObject -->
     <xs:complexType name="CelestialObject" abstract="true">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
             <xs:element name="name" type="xs:string"/>
-            <xs:element name="type" type="CelestialObjectType"/>
+            <xs:element name="celestialObjectType" type="CelestialObjectType"/>
             <xs:element name="mass" type="xs:double"/>
             <xs:element name="diameter" type="xs:double"/>
             <xs:element name="superficialGravity" type="xs:double"/>
@@ -31,7 +31,7 @@
         </xs:sequence>
     </xs:complexType>
 
-    <!-- Planeta -->
+    <!-- Planet -->
     <xs:complexType name="Planet">
         <xs:complexContent>
             <xs:extension base="CelestialObject">
@@ -44,18 +44,18 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- Lua -->
+    <!-- Moon -->
     <xs:complexType name="Moon">
         <xs:complexContent>
             <xs:extension base="CelestialObject">
                 <xs:sequence>
-                    <xs:element name="hostPlanet" type="xs:string"/>
+                    <xs:element name="hostPlanet" type="Planet"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- Estrela -->
+    <!-- Star -->
     <xs:complexType name="Star">
         <xs:complexContent>
             <xs:extension base="CelestialObject">
