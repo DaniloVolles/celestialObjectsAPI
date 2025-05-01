@@ -6,62 +6,62 @@
     elementFormDefault="qualified">
 
     <!-- Enumeração para tipos de astro -->
-    <xs:simpleType name="TipoAstro">
+    <xs:simpleType name="CelestialObjectType">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="ESTRELA"/>
-            <xs:enumeration value="PLANETA"/>
-            <xs:enumeration value="LUA"/>
-            <xs:enumeration value="ASTEROIDE"/>
-            <xs:enumeration value="COMETA"/>
-            <xs:enumeration value="PLANETA_ANAO"/>
-            <xs:enumeration value="OUTRO"/>
+            <xs:enumeration value="STAR"/>
+            <xs:enumeration value="PLANET"/>
+            <xs:enumeration value="MOON"/>
+            <xs:enumeration value="ASTEROID"/>
+            <xs:enumeration value="COMET"/>
+            <xs:enumeration value="DWARF_PLANET"/>
+            <xs:enumeration value="OTHER"/>
         </xs:restriction>
     </xs:simpleType>
 
     <!-- Tipo abstrato Astro -->
-    <xs:complexType name="Astro" abstract="true">
+    <xs:complexType name="CelestialObject" abstract="true">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
-            <xs:element name="nome" type="xs:string"/>
-            <xs:element name="tipo" type="TipoAstro"/>
-            <xs:element name="massa" type="xs:double"/>
-            <xs:element name="diametro" type="xs:double"/>
-            <xs:element name="gravidadeSuperficial" type="xs:double"/>
-            <xs:element name="distanciaMediaAoCentro" type="xs:double"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="type" type="CelestialObjectType"/>
+            <xs:element name="mass" type="xs:double"/>
+            <xs:element name="diameter" type="xs:double"/>
+            <xs:element name="superficialGravity" type="xs:double"/>
+            <xs:element name="meanDistanceToCenter" type="xs:double"/>
         </xs:sequence>
     </xs:complexType>
 
     <!-- Planeta -->
-    <xs:complexType name="Planeta">
+    <xs:complexType name="Planet">
         <xs:complexContent>
-            <xs:extension base="Astro">
+            <xs:extension base="CelestialObject">
                 <xs:sequence>
-                    <xs:element name="possuiAtmosfera" type="xs:boolean"/>
-                    <xs:element name="habitavel" type="xs:boolean"/>
-                    <xs:element name="luas" type="Lua" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="hasAtmosphere" type="xs:boolean"/>
+                    <xs:element name="habitable" type="xs:boolean"/>
+                    <xs:element name="moons" type="Moon" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- Lua -->
-    <xs:complexType name="Lua">
+    <xs:complexType name="Moon">
         <xs:complexContent>
-            <xs:extension base="Astro">
+            <xs:extension base="CelestialObject">
                 <xs:sequence>
-                    <xs:element name="planetaHospedeiro" type="xs:string"/>
+                    <xs:element name="hostPlanet" type="xs:string"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- Estrela -->
-    <xs:complexType name="Estrela">
+    <xs:complexType name="Star">
         <xs:complexContent>
-            <xs:extension base="Astro">
+            <xs:extension base="CelestialObject">
                 <xs:sequence>
-                    <xs:element name="temperatura" type="xs:double"/>
-                    <xs:element name="tipoEspectral" type="xs:string"/>
+                    <xs:element name="temperature" type="xs:double"/>
+                    <xs:element name="spectralType" type="xs:string"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
