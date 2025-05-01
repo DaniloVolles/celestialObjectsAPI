@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.danilovolles.com/celestialObjects"
+    xmlns="http://www.danilovolles.com/celestialObjects"
+    elementFormDefault="qualified">
+
+    <!-- Enumeração para tipos de astro -->
+    <xs:simpleType name="TipoAstro">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ESTRELA"/>
+            <xs:enumeration value="PLANETA"/>
+            <xs:enumeration value="LUA"/>
+            <xs:enumeration value="ASTEROIDE"/>
+            <xs:enumeration value="COMETA"/>
+            <xs:enumeration value="PLANETA_ANAO"/>
+            <xs:enumeration value="OUTRO"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Tipo abstrato Astro -->
+    <xs:complexType name="Astro" abstract="true">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="tipo" type="TipoAstro"/>
+            <xs:element name="massa" type="xs:double"/>
+            <xs:element name="diametro" type="xs:double"/>
+            <xs:element name="gravidadeSuperficial" type="xs:double"/>
+            <xs:element name="distanciaMediaAoCentro" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Planeta -->
+    <xs:complexType name="Planeta">
+        <xs:complexContent>
+            <xs:extension base="Astro">
+                <xs:sequence>
+                    <xs:element name="possuiAtmosfera" type="xs:boolean"/>
+                    <xs:element name="habitavel" type="xs:boolean"/>
+                    <xs:element name="luas" type="Lua" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Lua -->
+    <xs:complexType name="Lua">
+        <xs:complexContent>
+            <xs:extension base="Astro">
+                <xs:sequence>
+                    <xs:element name="planetaHospedeiro" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Estrela -->
+    <xs:complexType name="Estrela">
+        <xs:complexContent>
+            <xs:extension base="Astro">
+                <xs:sequence>
+                    <xs:element name="temperatura" type="xs:double"/>
+                    <xs:element name="tipoEspectral" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>
