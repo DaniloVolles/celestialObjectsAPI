@@ -1,4 +1,4 @@
-package com.danilo.volles.celestial.objects.api.model;
+package com.danilo.volles.celestial.objects.api.persistence.document;
 
 import com.danilovolles.celestialobjects.CelestialObjectType;
 import lombok.Data;

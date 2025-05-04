@@ -1,4 +1,4 @@
-package com.danilo.volles.celestial.objects.api.model;
+package com.danilo.volles.celestial.objects.api.persistence.document;
 
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
