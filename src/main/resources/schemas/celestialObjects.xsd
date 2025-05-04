@@ -31,6 +31,42 @@
         </xs:sequence>
     </xs:complexType>
 
+    <!-- Request para obter um objeto pelo nome -->
+    <xs:element name="GetCelestialObjectByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Response contendo o objeto celeste encontrado -->
+    <xs:element name="GetCelestialObjectByNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObject" type="CelestialObject" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Request para salvar um objeto -->
+    <xs:element name="SaveCelestialObjectRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObject" type="CelestialObject"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Response após salvar o objeto -->
+    <xs:element name="SaveCelestialObjectResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObject" type="CelestialObject"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <!-- Planet -->
     <xs:complexType name="Planet">
         <xs:complexContent>

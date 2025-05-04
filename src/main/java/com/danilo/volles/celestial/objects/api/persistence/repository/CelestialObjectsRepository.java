@@ -5,5 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CelestialObjectsDocument extends MongoRepository<CelestialObjectDocument, String> {
+public interface CelestialObjectsRepository extends MongoRepository<CelestialObjectDocument, String> {
+    CelestialObjectDocument findByName(String name);
 }
