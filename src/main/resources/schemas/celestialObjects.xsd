@@ -31,41 +31,17 @@
         </xs:sequence>
     </xs:complexType>
 
-    <!-- Request para obter um objeto pelo nome -->
-    <xs:element name="GetCelestialObjectByNameRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- Response contendo o objeto celeste encontrado -->
-    <xs:element name="GetCelestialObjectByNameResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="celestialObject" type="CelestialObject" minOccurs="0"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- Request para salvar um objeto -->
-    <xs:element name="SaveCelestialObjectRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="celestialObject" type="CelestialObject"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- Response após salvar o objeto -->
-    <xs:element name="SaveCelestialObjectResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="celestialObject" type="CelestialObject"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <!-- Star -->
+    <xs:complexType name="Star">
+        <xs:complexContent>
+            <xs:extension base="CelestialObject">
+                <xs:sequence>
+                    <xs:element name="temperature" type="xs:double"/>
+                    <xs:element name="spectralType" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <!-- Planet -->
     <xs:complexType name="Planet">
@@ -91,16 +67,152 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- Star -->
-    <xs:complexType name="Star">
+    <!-- Asteroid -->
+    <xs:complexType name="Asteroid">
         <xs:complexContent>
             <xs:extension base="CelestialObject">
                 <xs:sequence>
-                    <xs:element name="temperature" type="xs:double"/>
-                    <xs:element name="spectralType" type="xs:string"/>
+                    <xs:element name="orbitalPeriod" type="xs:double"/>
+                    <xs:element name="rotationPeriod" type="xs:double"/>
+                    <xs:element name="composition" type="xs:string"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <!-- Comet -->
+    <xs:complexType name="Comet">
+        <xs:complexContent>
+            <xs:extension base="CelestialObject">
+                <xs:sequence>
+                    <xs:element name="tailLength" type="xs:double"/>
+                    <xs:element name="perihelionDistance" type="xs:double"/>
+                    <xs:element name="comaSize" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Dwarf Planet -->
+    <xs:complexType name="DwarfPlanet">
+        <xs:complexContent>
+            <xs:extension base="CelestialObject">
+                <xs:sequence>
+                    <xs:element name="orbitalInclination" type="xs:double"/>
+                    <xs:element name="hasRingSystem" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Other -->
+    <xs:complexType name="Other">
+        <xs:complexContent>
+            <xs:extension base="CelestialObject">
+                <xs:sequence>
+                    <xs:element name="description" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- OPERATIONS -->
+    <!-- POST: CelestialObject -->
+    <xs:element name="SaveCelestialObjectRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObject" type="CelestialObject"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SaveCelestialObjectResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObject" type="CelestialObject"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- GET: CelestialObject by name -->
+    <xs:element name="GetCelestialObjectByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCelestialObjectByNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObject" type="CelestialObject" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- GET: CelestialObject by type -->
+    <xs:element name="GetCelestialObjectByTypeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObjectType" type="CelestialObjectType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCelestialObjectByTypeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObjects" type="CelestialObject" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- GET: All CelestialObject -->
+    <xs:element name="GetAllCelestialObjectsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <!-- No params -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetAllCelestialObjectsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObjects" type="CelestialObject" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- UPDATE: CelestialObject by name -->
+    <xs:element name="UpdateCelestialObjectRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="celestialObject" type="CelestialObject"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UpdateCelestialObjectResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="celestialObject" type="CelestialObject"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- DELETE: CelestialObject by name -->
+    <xs:element name="DeleteCelestialObjectRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeleteCelestialObjectResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="success" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>

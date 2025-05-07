@@ -1,10 +1,7 @@
 package com.danilo.volles.celestial.objects.api.mapper;
 
 import com.danilo.volles.celestial.objects.api.persistence.document.CelestialObjectDocument;
-import com.danilovolles.celestialobjects.CelestialObject;
-import com.danilovolles.celestialobjects.Moon;
-import com.danilovolles.celestialobjects.Planet;
-import com.danilovolles.celestialobjects.Star;
+import com.danilovolles.celestialobjects.*;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
@@ -16,11 +13,18 @@ public interface CelestialObjectMapper {
             case STAR -> mapToStar(entity);
             case PLANET -> mapToPlanet(entity);
             case MOON -> mapToMoon(entity);
-            default -> throw new IllegalArgumentException("Tipo desconhecido: " + entity.getCelestialObjectType());
+            case ASTEROID -> mapToAsteroid(entity);
+            case COMET -> mapToComet(entity);
+            case DWARF_PLANET -> mapToDwarfPlanet(entity);
+            case OTHER -> mapToOther(entity);
         };
     }
 
     Star mapToStar(CelestialObjectDocument entity);
     Planet mapToPlanet(CelestialObjectDocument entity);
     Moon mapToMoon(CelestialObjectDocument entity);
+    Asteroid mapToAsteroid(CelestialObjectDocument entity);
+    Comet mapToComet(CelestialObjectDocument entity);
+    DwarfPlanet mapToDwarfPlanet(CelestialObjectDocument entity);
+    Other mapToOther(CelestialObjectDocument entity);
 }

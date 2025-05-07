@@ -22,12 +22,24 @@ public class CelestialObjEndpoint {
         this.mapper = mapper;
     }
 
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SaveCelestialObjectRequest")
+    @ResponsePayload
+    public SaveCelestialObjectResponse saveCelestialObject(@RequestPayload SaveCelestialObjectRequest request) {
+        CelestialObjectDocument entity = mapper.toEntity(request.getCelestialObject());
+        CelestialObjectDocument saved = celestialObjectService.saveCelestialObject(entity);
+        CelestialObject dto = mapper.toDto(saved);
+
+        SaveCelestialObjectResponse response = new SaveCelestialObjectResponse();
+        response.setCelestialObject(dto);
+        return response;
+    }
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetCelestialObjectByNameRequest")
     @ResponsePayload
     public GetCelestialObjectByNameResponse getCelestialObjectByName(
             @RequestPayload GetCelestialObjectByNameRequest request
     ) {
-        CelestialObjectDocument document = celestialObjectService.getCelestialObject(request.getName());
+        CelestialObjectDocument document = celestialObjectService.getCelestialObjectByName(request.getName());
 
         if (document == null) {
             return new GetCelestialObjectByNameResponse();
@@ -41,15 +53,63 @@ public class CelestialObjEndpoint {
         return response;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "SaveCelestialObjectRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetCelestialObjectByTypeRequest")
     @ResponsePayload
-    public SaveCelestialObjectResponse saveCelestialObject(@RequestPayload SaveCelestialObjectRequest request) {
-        CelestialObjectDocument entity = mapper.toEntity(request.getCelestialObject());
-        CelestialObjectDocument saved = celestialObjectService.saveCelestialObject(entity);
-        CelestialObject dto = mapper.toDto(saved);
+    public GetCelestialObjectByTypeResponse getCelestialObjectsByType(
+            @RequestPayload GetCelestialObjectByTypeRequest request
+    ) {
+        var type = request.getCelestialObjectType().value(); // assumindo que é um enum
+        var documents = celestialObjectService.getCelestialObjectsByType(type);
 
-        SaveCelestialObjectResponse response = new SaveCelestialObjectResponse();
-        response.setCelestialObject(dto);
+        GetCelestialObjectByTypeResponse response = new GetCelestialObjectByTypeResponse();
+        for (CelestialObjectDocument doc : documents) {
+            CelestialObject dto = mapper.toDto(doc);
+            response.getCelestialObjects().add(dto);
+        }
+
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetAllCelestialObjectsRequest")
+    @ResponsePayload
+    public GetAllCelestialObjectsResponse getAllCelestialObjects() {
+        var documents = celestialObjectService.getAllCelestialObjects();
+
+        GetAllCelestialObjectsResponse response = new GetAllCelestialObjectsResponse();
+        for (CelestialObjectDocument doc : documents) {
+            CelestialObject dto = mapper.toDto(doc);
+            response.getCelestialObjects().add(dto);
+        }
+
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "UpdateCelestialObjectRequest")
+    @ResponsePayload
+    public UpdateCelestialObjectResponse updateCelestialObject(
+            @RequestPayload UpdateCelestialObjectRequest request
+    ) {
+        String name = request.getName();
+        CelestialObjectDocument updatedEntity = mapper.toEntity(request.getCelestialObject());
+
+        CelestialObjectDocument updated = celestialObjectService.updateCelestialObject(name, updatedEntity);
+
+        UpdateCelestialObjectResponse response = new UpdateCelestialObjectResponse();
+        response.setCelestialObject(mapper.toDto(updated));
+
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "DeleteCelestialObjectRequest")
+    @ResponsePayload
+    public DeleteCelestialObjectResponse deleteCelestialObject(
+            @RequestPayload DeleteCelestialObjectRequest request
+    ) {
+        boolean success = celestialObjectService.deleteCelestialObjectByName(request.getName());
+
+        DeleteCelestialObjectResponse response = new DeleteCelestialObjectResponse();
+        response.setSuccess(success);
+
         return response;
     }
 

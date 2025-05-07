@@ -1,7 +1,6 @@
 package com.danilo.volles.celestial.objects.api.service;
 
 import com.danilo.volles.celestial.objects.api.persistence.document.CelestialObjectDocument;
-import com.danilovolles.celestialobjects.CelestialObject;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +8,17 @@ import java.util.List;
 @Service
 public interface CelestialObjectService {
 
+    // POST
     CelestialObjectDocument saveCelestialObject(CelestialObjectDocument celestialObject);
-    CelestialObjectDocument getCelestialObject(String name);
+
+    // GET
+    CelestialObjectDocument getCelestialObjectByName(String name);
     List<CelestialObjectDocument> getAllCelestialObjects();
+    List<CelestialObjectDocument> getCelestialObjectsByType(String type);
+
+    // UPDATE
+    CelestialObjectDocument updateCelestialObject(String name, CelestialObjectDocument updatedData);
+
+    // DELETE
+    boolean deleteCelestialObjectByName(String name);
 }

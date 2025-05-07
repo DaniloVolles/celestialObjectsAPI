@@ -4,13 +4,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Document(collection = "planets")
-public class PlanetDocument extends CelestialObjectDocument {
-    private boolean hasAtmosphere;
-    private boolean habitable;
-    private List<MoonDocument> moons;
+@Document(collection = "asteroids")
+public class AsteroidDocument extends CelestialObjectDocument {
+    private double orbitalPeriod;
+    private double rotationPeriod;
+    private String composition;
 }
