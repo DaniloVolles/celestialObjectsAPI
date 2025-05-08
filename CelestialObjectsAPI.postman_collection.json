@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "730a31b4-2ba3-4aa0-910c-8bb16b6abb26",
+		"name": "Celestial Objects API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24322681"
+	},
+	"item": [
+		{
+			"name": "wsdl",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/ws/celestialObjects.wsdl",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"ws",
+						"celestialObjects.wsdl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:cel=\"http://www.danilovolles.com/celestialObjects\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n        <cel:SaveCelestialObjectRequest>\r\n        <cel:celestialObject xsi:type=\"cel:Planet\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n            <cel:id>3</cel:id>\r\n            <cel:name>Sun</cel:name>\r\n            <cel:celestialObjectType>STAR</cel:celestialObjectType>\r\n            <cel:mass>5.972E24</cel:mass>\r\n            <cel:diameter>12742</cel:diameter>\r\n            <cel:superficialGravity>9.807</cel:superficialGravity>\r\n            <cel:meanDistanceToCenter>1.496E8</cel:meanDistanceToCenter>\r\n            <cel:hasAtmosphere>true</cel:hasAtmosphere>\r\n            <cel:habitable>false</cel:habitable>\r\n            <!-- opcionalmente, liste as luas aqui -->\r\n        </cel:celestialObject>\r\n        </cel:SaveCelestialObjectRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/ws",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"ws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getByName",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:cel=\"http://www.danilovolles.com/celestialObjects\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <cel:GetCelestialObjectByNameRequest>\r\n         <cel:name>Marte</cel:name>\r\n      </cel:GetCelestialObjectByNameRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/ws",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"ws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getByType",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\n                  xmlns:cel=\"http://www.danilovolles.com/celestialObjects\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <cel:GetCelestialObjectByTypeRequest>\r\n            <cel:celestialObjectType>PLANET</cel:celestialObjectType>\r\n        </cel:GetCelestialObjectByTypeRequest>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/ws",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"ws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllObjects",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\n                  xmlns:cel=\"http://www.danilovolles.com/celestialObjects\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <cel:GetCelestialObjectByTypeRequest>\r\n            <cel:celestialObjectType>PLANET</cel:celestialObjectType>\r\n        </cel:GetCelestialObjectByTypeRequest>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/ws",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"ws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateByName",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:cel=\"http://www.danilovolles.com/celestialObjects\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <cel:UpdateCelestialObjectRequest>\r\n            <cel:name>Sun</cel:name>\r\n            <cel:celestialObject xsi:type=\"cel:Star\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n                <cel:id>3</cel:id>\r\n                <cel:name>Sun</cel:name>\r\n                <cel:celestialObjectType>STAR</cel:celestialObjectType>\r\n                <cel:mass>1.989E30</cel:mass>\r\n                <cel:diameter>1391000</cel:diameter>\r\n                <cel:superficialGravity>274</cel:superficialGravity>\r\n                <cel:meanDistanceToCenter>0</cel:meanDistanceToCenter>\r\n                <cel:temperature>5778</cel:temperature>\r\n                <cel:spectralType>G2V</cel:spectralType>\r\n            </cel:celestialObject>\r\n        </cel:UpdateCelestialObjectRequest>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/ws",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"ws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteByName",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\n                  xmlns:cel=\"http://www.danilovolles.com/celestialObjects\">\r\n    <soapenv:Header/>\r\n    <soapenv:Body>\r\n        <cel:UpdateCelestialObjectRequest>\r\n            <cel:name>Sun</cel:name>\r\n            <cel:celestialObject xsi:type=\"cel:Star\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n                <cel:id>3</cel:id>\r\n                <cel:name>Sun</cel:name>\r\n                <cel:celestialObjectType>STAR</cel:celestialObjectType>\r\n                <cel:mass>1.989E30</cel:mass>\r\n                <cel:diameter>1391000</cel:diameter>\r\n                <cel:superficialGravity>274</cel:superficialGravity>\r\n                <cel:meanDistanceToCenter>0</cel:meanDistanceToCenter>\r\n                <cel:temperature>5778</cel:temperature>\r\n                <cel:spectralType>G2V</cel:spectralType>\r\n            </cel:celestialObject>\r\n        </cel:UpdateCelestialObjectRequest>\r\n    </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/ws",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"ws"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:9090",
+			"type": "default"
+		}
+	]
+}
