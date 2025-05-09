@@ -77,18 +77,17 @@ git clone https://github.com/DaniloVolles/celestialObjectsAPI.git
 ```
 
 **2. Abrir o projeto na IDE de sua preferência | Open the project in your preferred IDE**  
-_Recomendação: IntelliJ IDEA_  
-_Recommendation: IntelliJ IDEA_
+_Recomendação | Recommendation: IntelliJ IDEA_
 
 ---
 
 **3. Compilar o projeto | Compile the project**
 
-> ⚠️ Este passo é opcional, mas pode ajudar a verificar a integridade do projeto.  
-> Não se assuste com erros: diversas classes são geradas automaticamente a partir do arquivo XSD.
+> ⚠️ Opcional, mas pode ajudar a verificar a integridade do projeto.  
+> Não se assuste com erros: diversas classes são geradas automagicamente a partir do arquivo XSD.
 >
-> ⚠️ This step is optional but can help verify the integrity of the project.  
-> Don’t worry about errors: several classes are auto-generated from the XSD file.
+> ⚠️ This is optional but can help verify the integrity of the project.  
+> Don’t worry about errors: several classes are magically auto-generated from the XSD file.
 
 ```bash
 mvn clean compile
